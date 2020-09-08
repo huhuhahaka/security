@@ -1,0 +1,32 @@
+# Java
+*.class
+ 
+# Eclipse
+.classpath
+.factorypath
+.project
+.settings/
+ 
+# Intellij
+.idea/
+*.iml
+*.iws
+out/
+ 
+# Mac
+.DS_Store
+ 
+# Maven
+target/
+ 
+# svn
+.svn/
+ 
+scandir/
+rebel.xml
+ 
+#lilei environment
+dep2.sh
+ 
+#log
+*.log

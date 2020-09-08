@@ -1,0 +1,54 @@
+server:
+  port: 51220
+  servlet:
+    context-path: /certificate
+  remote-ip-header: x-forwarded-for
+  protocol-header: x-forwarded-proto
+
+spring:
+  application:
+    name: certificate-server
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+  main:
+    allow-bean-definition-overriding: true
+
+
+#mybatis-plus:
+#  type-aliases-package: com.fruits.orange.certificate.bean.entity
+#  mapper-locations: classpath*:mapper/*.xml
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:51200/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info,env
+
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
